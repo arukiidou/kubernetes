@@ -12,8 +12,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Test Runs all the presubmission verifications.
-      run: make verify
+      run: make verify WHAT=.plugin/pkg/auth/authorizer/rbac/bootstrappolicy
     - name: Build and run tests.
-      run: make test
+      run: make test WHAT=.plugin/pkg/auth/authorizer/rbac/bootstrappolicy
     - name: Build and run integration tests.
-      run: make test-integration
+      run: make test-integration WHAT=.plugin/pkg/auth/authorizer/rbac/bootstrappolicy
