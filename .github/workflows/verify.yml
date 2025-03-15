@@ -1,4 +1,4 @@
-name: Go
+name: kube-test
 
 on:
   pull_request:
@@ -11,5 +11,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Test
+    - name: Test Runs all the presubmission verifications.
       run: make verify
+    - name: Build and run tests.
+      run: make test
+    - name: Build and run integration tests.
+      run: make test-integration
