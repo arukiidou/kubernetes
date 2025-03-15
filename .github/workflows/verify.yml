@@ -1,0 +1,20 @@
+name: kube-test
+
+on:
+  pull_request:
+    branches: ['*']
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    # - name: Build and run tests.
+    # run: make test WHAT=./plugin/pkg/auth/authorizer/rbac/bootstrappolicy
+    - name: Build and run integration tests.
+      run: | 
+        hack/install-etcd.sh
+        echo export PATH="\$PATH:$(pwd)/third_party/etcd" >> ~/.profile  # Add to PATH
+        make test-integration WHAT=./plugin/pkg/auth/authorizer/rbac/bootstrappolicy
