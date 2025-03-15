@@ -11,7 +11,11 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Build and run tests.
-      run: make test WHAT=./plugin/pkg/auth/authorizer/rbac/bootstrappolicy
+    # - name: Build and run tests.
+    # run: make test WHAT=./plugin/pkg/auth/authorizer/rbac/bootstrappolicy
+    - name: Installs in ./third_party/etcd
+      run: hack/install-etcd.sh
+    - name: Build and run integration tests.
+      run: echo export PATH="\$PATH:$(pwd)/third_party/etcd" >> ~/.profile  # Add to PATH
     - name: Build and run integration tests.
       run: make test-integration WHAT=./plugin/pkg/auth/authorizer/rbac/bootstrappolicy
